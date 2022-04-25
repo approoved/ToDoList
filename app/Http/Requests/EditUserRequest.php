@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\BaseUserRequest;
 
-class EditUserRequest extends BaseUserRequest
+final class EditUserRequest extends BaseUserRequest
 {
     public function rules(): array
     {
