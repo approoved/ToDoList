@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 final class AuthController extends Controller
 {
-    public function verify(string|null $token): JsonResponse
+    public function verify(string $token): JsonResponse
     {
         /** @var User $user */
         $user = User::query()->where('token', $token)->firstOrFail();
