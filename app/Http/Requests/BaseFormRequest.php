@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 abstract class BaseFormRequest extends FormRequest
 {
-    abstract function rules(): array;
+    abstract public function rules(): array;
 
     public function authorize(): bool
     {

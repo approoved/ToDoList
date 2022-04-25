@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\Response as HttpResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -45,7 +46,7 @@ final class AuthController extends Controller
     /** 
     * @param Authenticatable&User $user
     */
-    public function logout(Authenticatable $user)
+    public function logout(Authenticatable $user): HttpResponse
     {
         $user->token()->revoke();
 
