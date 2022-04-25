@@ -1,19 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/users/{token}', [AuthController::class, 'verify'])->name('email.verify');
+Route::middleware('auth:api')->delete('/users', [AuthController::class, 'logout'])->name('logout');
