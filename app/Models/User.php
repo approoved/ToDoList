@@ -24,7 +24,7 @@ class User extends Authenticatable
     use Notifiable;
     use HasApiTokens;
 
-    protected array $fillable = [
+    protected $fillable = [
         'first_name',
         'last_name',
         'email',
@@ -33,12 +33,12 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
-    protected array $hidden = [
+    protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    protected array $casts = [
+    protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 }
