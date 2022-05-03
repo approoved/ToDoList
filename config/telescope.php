@@ -77,7 +77,8 @@ return [
 
     'middleware' => [
         'web',
-        Authorize::class,
+        'telescope.credentials',
+        'basic.auth',
     ],
 
     /*

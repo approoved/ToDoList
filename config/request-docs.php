@@ -12,8 +12,9 @@ return [
     */
     'url' => 'request-docs',
     'middlewares' => [
-        //Example
-        // \App\Http\Middleware\NotFoundWhenProduction::class,
+        'web',
+        'lrd.credentials',
+        'basic.auth',
     ],
     /**
      * Path to to static HTML if using command line.
