@@ -1,6 +1,12 @@
 <?php
 
 return [
+    
+    'basic_auth' => [
+        'username' => env('REQUESTDOCS_USERNAME', null),
+        'password' => env('REQUESTDOCS_PASSWORD', null),
+    ],
+
      // change it to true will make lrd to throw exception if rules in request class need to be changed
      // keep it false
     'debug'  => false,
@@ -13,9 +19,9 @@ return [
     'url' => 'request-docs',
     'middlewares' => [
         'web',
-        'lrd.credentials',
-        'basic.auth',
+        App\Http\Middleware\BasicAuth\RequestDocsBasicAuth::class,
     ],
+
     /**
      * Path to to static HTML if using command line.
      */

@@ -1,6 +1,5 @@
 <?php
 
-use Laravel\Telescope\Http\Middleware\Authorize;
 use Laravel\Telescope\Watchers;
 
 return [
@@ -62,7 +61,7 @@ return [
     |
     */
 
-    'enabled' => env('TELESCOPE_ENABLED', true),
+    'enabled' => env('TELESCOPE_ENABLED', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -77,8 +76,12 @@ return [
 
     'middleware' => [
         'web',
-        'telescope.credentials',
-        'basic.auth',
+        App\Http\Middleware\BasicAuth\TelescopeBasicAuth::class,
+    ],
+
+    'basic_auth' => [
+        'username' => env('TELESCOPE_USERNAME', null),
+        'password' => env('TELESCOPE_PASSWORD', null),
     ],
 
     /*
