@@ -36,7 +36,8 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@php artisan telescope:install"
+            "@php artisan telescope:install",
+            "@php artisan lrd:generate"
         ],
 
         "post-autoload-dump": [
