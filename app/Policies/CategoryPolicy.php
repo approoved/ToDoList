@@ -29,4 +29,14 @@ final class CategoryPolicy
     {
         return $this->manage($user, $category);
     }
+
+    public function attachTask(Authenticatable $user, Category $category): bool
+    {
+        return $this->manage($user, $category);
+    }
+
+    public function viewAny(Authenticatable $user, Category $category): bool
+    {
+        return $this->manage($user, $category);
+    }
 }

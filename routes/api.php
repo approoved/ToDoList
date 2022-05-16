@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 
@@ -27,4 +28,15 @@ Route::middleware('auth:api')
         Route::get('/{category}', 'show');
         Route::put('/{category}', 'update');
         Route::delete('/{category}', 'destroy');
+});
+
+Route::middleware('auth:api')
+    ->prefix('/categories/{category}/tasks')
+    ->controller(TaskController::class)
+    ->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+        Route::get('/{task}', 'show');
+        Route::put('/{task}', 'update');
+        Route::delete('/{task}', 'destroy');
 });

@@ -3,33 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @property int id
  * @property string name
- * @property int user_id
+ * @property string notes
+ * @property int category_id
  * @property Carbon|null created_at
  * @property Carbon|null updated_at
  */
-class Category extends Model
+class Task extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'user_id',
+        'category_id',
+        'notes',
     ];
 
-    public function user(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(Task::class);
+        return $this->belongsTo(Category::class);
     }
 }
