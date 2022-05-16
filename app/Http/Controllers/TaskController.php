@@ -12,9 +12,6 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 class TaskController extends Controller
 {
-    /**
-     * @param Authenticatable&User $user
-     */
     public function index(Category $category): JsonResponse
     {
         $this->authorize('viewAny', $category);
@@ -24,9 +21,6 @@ class TaskController extends Controller
         return response()->json($tasks);
     }
 
-    /**
-     * @param Authenticatable&User $user
-     */
     public function store(Category $category, CreateTaskRequest $request): JsonResponse
     {
         $this->authorize('attachTask', $category);
