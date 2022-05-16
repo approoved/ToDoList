@@ -15,7 +15,7 @@ class TaskController extends Controller
     /**
      * @param Authenticatable&User $user
      */
-    public function index(Category $category, Authenticatable $user): JsonResponse
+    public function index(Category $category): JsonResponse
     {
         $this->authorize('viewAny', $category);
 
@@ -27,7 +27,7 @@ class TaskController extends Controller
     /**
      * @param Authenticatable&User $user
      */
-    public function store(Category $category, Authenticatable $user, CreateTaskRequest $request): JsonResponse
+    public function store(Category $category, CreateTaskRequest $request): JsonResponse
     {
         $this->authorize('attachTask', $category);
 
