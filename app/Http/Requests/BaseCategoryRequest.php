@@ -11,7 +11,7 @@ abstract class BaseCategoryRequest extends BaseFormRequest
         $required = $isCreate ? 'required' : 'sometimes';
 
         return [
-            'name' => $required,
+            'name' => [$required],
         ];
     }
 }
