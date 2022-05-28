@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Http\Response;
+use App\Policies\CategoryPolicy;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\EditCategoryRequest;
 use App\Http\Requests\CreateCategoryRequest;
-use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Contracts\Auth\Authenticatable;
 
 final class CategoryController extends Controller
@@ -35,30 +36,30 @@ final class CategoryController extends Controller
         $category = new Category();
         $category->fill($data)->save();
 
-        return response()->json($category, 201);
+        return response()->json($category, Response::HTTP_CREATED);
     }
 
     public function show(Category $category): JsonResponse
     {
-        $this->authorize('show', $category);
+        $this->authorize(CategoryPolicy::SHOW, $category);
 
         return response()->json($category);
     }
 
     public function update(Category $category, EditCategoryRequest $request): JsonResponse
     {
-        $this->authorize('update', $category);
+        $this->authorize(CategoryPolicy::UPDATE, $category);
 
         $data = $request->validated();
 
         $category->update($data);
 
-        return response()->json($category, 201);
+        return response()->json($category, Response::HTTP_CREATED);
     }
 
-    public function destroy(Category $category): HttpResponse
+    public function destroy(Category $category): Response
     {
-        $this->authorize('destroy', $category);
+        $this->authorize(CategoryPolicy::DESTROY, $category);
 
         $category->delete();
 
