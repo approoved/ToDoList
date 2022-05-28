@@ -10,6 +10,9 @@ final class TaskPolicy
 {
     use HandlesAuthorization;
 
+    public const ATTACH_TAG = 'attachTag';
+    public const DETACH_TAG = 'detachTag';
+
     public function manage(Authenticatable $user, Task $task): bool
     {
         return $user->id === $task->category->user_id;
@@ -26,6 +29,16 @@ final class TaskPolicy
     }
 
     public function destroy(Authenticatable $user, Task $task): bool
+    {
+        return $this->manage($user, $task);
+    }
+
+    public function attachTag(Authenticatable $user, Task $task): bool
+    {
+        return $this->manage($user, $task);
+    }
+
+    public function detachTag(Authenticatable $user, Task $task): bool
     {
         return $this->manage($user, $task);
     }
