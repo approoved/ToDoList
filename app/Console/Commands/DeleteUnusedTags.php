@@ -8,33 +8,22 @@ use Illuminate\Console\Command;
 class DeleteUnusedTags extends Command
 {
     /**
-     * The name and signature of the console command.
-     *
      * @var string
      */
     protected $signature = 'delete:unused-tags';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'Delete all unused Tag Models';
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
+    public function handle(): void
     {
-        $tags = Tag::query()
+        Tag::query()
             ->whereDoesntHave('tasks')
-            ->get();
-
-        /** @var Tag $tag */
-        foreach ($tags as $tag) {
-            $tag->delete();
-        }
+            ->get()
+            ->each(function (Tag $tag): void {
+                $tag->delete();
+            });
     }
 }
