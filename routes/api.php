@@ -31,12 +31,11 @@ Route::middleware('auth:api')
 });
 
 Route::middleware('auth:api')
-    ->prefix('/categories/{category}/tasks')
     ->controller(TaskController::class)
     ->group(function () {
-        Route::get('/', 'index');
-        Route::post('/', 'store');
-        Route::get('/{task}', 'show');
-        Route::put('/{task}', 'update');
-        Route::delete('/{task}', 'destroy');
+        Route::get('/categories/{category}/tasks', 'index');
+        Route::post('/categories/{category}/tasks', 'store');
+        Route::get('/tasks/{task}', 'show');
+        Route::put('/tasks/{task}', 'update');
+        Route::delete('/tasks/{task}', 'destroy');
 });

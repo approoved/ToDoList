@@ -10,10 +10,9 @@ final class TaskPolicy
 {
     use HandlesAuthorization;
 
-    public function manage(Authenticatable $user, Task $task): bool
-    {
-        return $user->id === $task->category->user_id;
-    }
+    public const SHOW = 'show';
+    public const UPDATE = 'update';
+    public const DESTROY = 'destroy';
 
     public function show(Authenticatable $user, Task $task): bool
     {
@@ -28,5 +27,10 @@ final class TaskPolicy
     public function destroy(Authenticatable $user, Task $task): bool
     {
         return $this->manage($user, $task);
+    }
+
+    private function manage(Authenticatable $user, Task $task): bool
+    {
+        return $user->id === $task->category->user_id;
     }
 }

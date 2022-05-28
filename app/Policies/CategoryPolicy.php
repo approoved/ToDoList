@@ -10,6 +10,9 @@ final class CategoryPolicy
 {
     use HandlesAuthorization;
 
+    public const ATTACH_TASK = 'attachTask';
+    public const VIEW_ANY = 'viewAny';
+
     public function manage(Authenticatable $user, Category $category): bool
     {
         return $user->id === $category->user_id;
