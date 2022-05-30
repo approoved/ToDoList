@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Tag;
-use App\Models\Task;
-use App\Models\Category;
+use Carbon\Carbon;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
@@ -24,8 +23,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property Carbon|null created_at
  * @property Carbon|null updated_at
  * @property string|null remember_token
- * @property Collection&Iterable_<int, tag> tags
- * @property Collection&Iterable_<int, category> categories
+ * @property Collection&iterable<int, Tag> tags
+ * @property Collection&iterable<int, Category> categories
  */
 class User extends Authenticatable
 {
@@ -52,12 +51,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function catergories(): HasMany
+    public function categories(): HasMany
     {
         return $this->hasMany(Category::class);
     }
 
-    public function tags(): \Staudenmeir\EloquentHasManyDeep\HasManyDeep
+    public function tags(): HasManyDeep
     {
         return $this->hasManyDeep(
             Tag::class,

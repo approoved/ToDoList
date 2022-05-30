@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Tag;
-use App\Models\Category;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
