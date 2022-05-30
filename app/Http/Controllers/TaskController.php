@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Task;
 use App\Models\Category;
+use App\Policies\TaskPolicy;
+use Illuminate\Http\Response;
+use App\Http\Requests\TagRequest;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\EditTaskRequest;
 use App\Http\Requests\CreateTaskRequest;
 use Illuminate\Http\Response as HttpResponse;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 class TaskController extends Controller
 {
@@ -31,7 +34,7 @@ class TaskController extends Controller
 
         $task = new Task();
         $task->fill($data)->save();
-        
+
         return response()->json($task, 201);
     }
 
@@ -58,6 +61,30 @@ class TaskController extends Controller
         $this->authorize('destroy', $task);
 
         $task->delete();
+
+        return response()->noContent();
+    }
+
+    public function attach(TagRequest $request, Task $task): JsonResponse
+    {
+        $this->authorize(TaskPolicy::ATTACH_TAG, $task);
+
+        $data = $request->validated();
+
+        /** @var Tag $tag */
+        $tag = Tag::query()->firstOrCreate($data);
+
+        $task->tags()->syncWithoutDetaching($tag->id);
+        $task->load('tags');
+
+        return response()->json($task, Response::HTTP_CREATED);
+    }
+
+    public function detach(Task $task, Tag $tag): Response
+    {
+        $this->authorize(TaskPolicy::DETACH_TAG, $task);
+
+        $task->tags()->detach($tag->id);
 
         return response()->noContent();
     }
