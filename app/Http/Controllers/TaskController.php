@@ -65,7 +65,7 @@ class TaskController extends Controller
         return response()->noContent();
     }
 
-    public function attach(TagRequest $request, Task $task): JsonResponse
+    public function attachTag(TagRequest $request, Task $task): JsonResponse
     {
         $this->authorize(TaskPolicy::ATTACH_TAG, $task);
 
@@ -80,7 +80,7 @@ class TaskController extends Controller
         return response()->json($task, Response::HTTP_CREATED);
     }
 
-    public function detach(Task $task, Tag $tag): Response
+    public function detachTag(Task $task, Tag $tag): Response
     {
         $this->authorize(TaskPolicy::DETACH_TAG, $task);
 

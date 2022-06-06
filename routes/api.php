@@ -37,8 +37,8 @@ Route::middleware('auth:api')->group(function () {
             Route::get('/categories/{category}/tasks/{task}', 'show');
             Route::put('/categories/{category}/tasks/{task}', 'update');
             Route::delete('/categories/{category}/tasks/{task}', 'destroy');
-            Route::post('/tasks/{task}/tags', 'attach');
-            Route::delete('/tasks/{task}/tags/{tag}', 'detach');
+            Route::post('/tasks/{task}/tags', 'attachTag');
+            Route::delete('/tasks/{task}/tags/{tag}', 'detachTag');
     });
 
     Route::controller(TagController::class)
