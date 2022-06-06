@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property Carbon|null created_at
  * @property Carbon|null updated_at
  * @property Collection|iterable <int, Task> tasks
+ * @property User user
  */
 class Category extends Model
 {

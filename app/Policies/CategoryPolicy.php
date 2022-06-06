@@ -10,13 +10,11 @@ final class CategoryPolicy
 {
     use HandlesAuthorization;
 
+    public const SHOW = 'show';
+    public const UPDATE = 'update';
+    public const DESTROY = 'destroy';
     public const ATTACH_TASK = 'attachTask';
     public const VIEW_ANY = 'viewAny';
-
-    public function manage(Authenticatable $user, Category $category): bool
-    {
-        return $user->id === $category->user_id;
-    }
 
     public function show(Authenticatable $user, Category $category): bool
     {
@@ -41,5 +39,10 @@ final class CategoryPolicy
     public function viewAny(Authenticatable $user, Category $category): bool
     {
         return $this->manage($user, $category);
+    }
+
+    private function manage(Authenticatable $user, Category $category): bool
+    {
+        return $user->id === $category->user_id;
     }
 }
