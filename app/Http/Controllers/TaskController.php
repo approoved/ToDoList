@@ -7,26 +7,27 @@ use App\Models\Task;
 use App\Models\Category;
 use App\Policies\TaskPolicy;
 use Illuminate\Http\Response;
+use App\Policies\CategoryPolicy;
 use App\Http\Requests\TagRequest;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\EditTaskRequest;
 use App\Http\Requests\CreateTaskRequest;
-use Illuminate\Http\Response as HttpResponse;
+
 
 class TaskController extends Controller
 {
     public function index(Category $category): JsonResponse
     {
-        $this->authorize('viewAny', $category);
+        $this->authorize(CategoryPolicy::VIEW_ANY, $category);
 
         $tasks = $category->tasks()->paginate(10);
 
         return response()->json($tasks);
     }
 
-    public function store(Category $category, CreateTaskRequest $request): JsonResponse
+    public function store(CreateTaskRequest $request, Category $category): JsonResponse
     {
-        $this->authorize('attachTask', $category);
+        $this->authorize(CategoryPolicy::ATTACH_TASK, $category);
 
         $data = $request->validated();
 
@@ -34,31 +35,31 @@ class TaskController extends Controller
 
         $task = new Task();
         $task->fill($data)->save();
-
-        return response()->json($task, 201);
+      
+        return response()->json($task, Response::HTTP_CREATED);
     }
 
-    public function show(Category $category, Task $task): JsonResponse
+    public function show(Task $task): JsonResponse
     {
-        $this->authorize('show', $task);
+        $this->authorize(TaskPolicy::SHOW, $task);
 
         return response()->json($task);
     }
 
-    public function update(Category $category, Task $task, EditTaskRequest $request): JsonResponse
+    public function update(EditTaskRequest $request, Task $task): JsonResponse
     {
-        $this->authorize('update', $task);
+        $this->authorize(TaskPolicy::UPDATE, $task);
 
         $data = $request->validated();
 
         $task->update($data);
 
-        return response()->json($task, 201);
+        return response()->json($task, Response::HTTP_CREATED);
     }
 
-    public function destroy(Category $category, Task $task): HttpResponse
+    public function destroy(Task $task): Response
     {
-        $this->authorize('destroy', $task);
+        $this->authorize(TaskPolicy::DESTROY, $task);
 
         $task->delete();
 

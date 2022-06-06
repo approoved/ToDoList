@@ -11,8 +11,8 @@ abstract class BaseTaskRequest extends BaseFormRequest
         $required = $isCreate ? 'required' : 'sometimes';
 
         return [
-            'name' => $required,
-            'notes' => 'sometimes',
+            'name' => [$required],
+            'notes' => ['sometimes'],
         ];
     }
 }
