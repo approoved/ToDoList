@@ -13,6 +13,8 @@ final class TaskPolicy
     public const SHOW = 'show';
     public const UPDATE = 'update';
     public const DESTROY = 'destroy';
+    public const ATTACH_TAG = 'attachTag';
+    public const DETACH_TAG = 'detachTag';
 
     public function show(Authenticatable $user, Task $task): bool
     {
@@ -29,6 +31,16 @@ final class TaskPolicy
         return $this->manage($user, $task);
     }
 
+    public function attachTag(Authenticatable $user, Task $task): bool
+    {
+        return $this->manage($user, $task);
+    }
+
+    public function detachTag(Authenticatable $user, Task $task): bool
+    {
+        return $this->manage($user, $task);
+    }
+  
     private function manage(Authenticatable $user, Task $task): bool
     {
         return $user->id === $task->category->user_id;
