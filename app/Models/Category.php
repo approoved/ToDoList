@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int user_id
  * @property Carbon|null created_at
  * @property Carbon|null updated_at
+ * @property Collection|iterable <int, Task> tasks
  * @property User user
  */
 class Category extends Model
@@ -27,5 +30,10 @@ class Category extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
     }
 }
