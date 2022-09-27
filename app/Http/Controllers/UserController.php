@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Notifications\Verification;
 use App\Http\Requests\CreateUserRequest;
 use Symfony\Component\HttpFoundation\JsonResponse;
