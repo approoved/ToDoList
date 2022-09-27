@@ -13,6 +13,8 @@ final class CategoryPolicy
     public const SHOW = 'show';
     public const UPDATE = 'update';
     public const DESTROY = 'destroy';
+    public const ATTACH_TASK = 'attachTask';
+    public const VIEW_ANY = 'viewAny';
 
     public function show(Authenticatable $user, Category $category): bool
     {
@@ -25,6 +27,16 @@ final class CategoryPolicy
     }
 
     public function destroy(Authenticatable $user, Category $category): bool
+    {
+        return $this->manage($user, $category);
+    }
+
+    public function attachTask(Authenticatable $user, Category $category): bool
+    {
+        return $this->manage($user, $category);
+    }
+
+    public function viewAny(Authenticatable $user, Category $category): bool
     {
         return $this->manage($user, $category);
     }

@@ -13,12 +13,12 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 final class CategoryController extends Controller
 {
-    /** 
+    /**
      * @param Authenticatable&User $user
      */
     public function index(Authenticatable $user): JsonResponse
     {
-        $categories = $user->catergories()
+        $categories = $user->categories()
             ->paginate(10);
 
         return response()->json($categories);
