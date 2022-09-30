@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
     'basic_auth' => [
         'username' => env('REQUESTDOCS_USERNAME', null),
         'password' => env('REQUESTDOCS_PASSWORD', null),
@@ -19,7 +19,7 @@ return [
     'url' => 'request-docs',
     'middlewares' => [
         'web',
-        App\Http\Middleware\BasicAuth\RequestDocsBasicAuth::class,
+//        App\Http\Middleware\BasicAuth\RequestDocsBasicAuth::class,
     ],
 
     /**
@@ -33,7 +33,7 @@ return [
     'sort_by' => 'default',
 
     //Use only routes where ->uri start with next string Using Str::startWith( . e.g. - /api/mobile
-    'only_route_uri_start_with' => '',
+    'only_route_uri_start_with' => '/api',
 
     'hide_matching' => [
         "#^telescope#",
