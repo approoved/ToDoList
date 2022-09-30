@@ -13,15 +13,15 @@
         "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.7",
         "spatie/laravel-query-builder": "^5.0",
-        "staudenmeir/eloquent-has-many-deep": "^1.15"
+        "staudenmeir/eloquent-has-many-deep": "^1.15",
+        "rakutentech/laravel-request-docs": "^1.22",
+        "fakerphp/faker": "^1.9.1"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
-        "rakutentech/laravel-request-docs": "^1.22",
         "spatie/laravel-ignition": "^1.0"
     },
     "autoload": {
@@ -38,8 +38,10 @@
     },
     "scripts": {
         "post-install-cmd": [
+            "@php artisan migrate --force",
             "@php artisan telescope:install",
-            "@php artisan lrd:generate"
+            "@php artisan lrd:generate",
+            "@php artisan pasport:install"
         ],
 
         "post-autoload-dump": [
