@@ -41,7 +41,7 @@
             "@php artisan migrate --force",
             "@php artisan telescope:install",
             "@php artisan lrd:generate",
-            "@php artisan pasport:install"
+            "@php artisan passport:install"
         ],
 
         "post-autoload-dump": [
